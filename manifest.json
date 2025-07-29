@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "MadeMarket Tools",
+  "version": "1.1",
+  "description": "Inject tools into MadeMarket pages and add Axial search context menu.",
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mademarket.co/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+}
