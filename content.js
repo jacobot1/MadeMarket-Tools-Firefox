@@ -212,14 +212,14 @@
       const name = input.value.trim().toLowerCase();
       if (name) {
         const slug = name
-          .replace(/([a-zA-Z])\s*&\s*([a-zA-Z])/g, (_, a, b) => `${a}${b}`) // S&T → st
-          .replace(/\s*&\s*/g, '-and-')                                     // Smith & Jones → smith-and-jones
-          .replace(/&/g, '-and-')                                           // catch remaining lone ampersands
+          .replace(/(?<=\b[a-zA-Z])&(?=[a-zA-Z]\b)/g, '') // S&T → st
+          .replace(/\s*&\s*/g, '-and-')                   // Smith & Jones → smith-and-jones
+          .replace(/&/g, '-and-')                         // catch remaining lone ampersands
           .toLowerCase()
-          .replace(/\./g, "")                                               // no periods
-          .replace(/[^a-z0-9]+/g, '-')                                      // non-alphanum → dash
-          .replace(/-+/g, "-")                                              // no double dashes
-          .replace(/^-+|-+$/g, '');                                         // trim leading/trailing dashes
+          .replace(/\./g, "")                             // no periods
+          .replace(/[^a-z0-9]+/g, '-')                    // non-alphanum → dash
+          .replace(/-+/g, "-")                            // no double dashes
+          .replace(/^-+|-+$/g, '');                       // trim leading/trailing dashes
 
         const axialURL = `https://network.axial.net/company/${slug}`;
         window.open(axialURL, '_blank');  // <-- Open in a new tab instead of current tab
