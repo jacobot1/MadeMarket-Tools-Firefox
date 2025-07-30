@@ -14,7 +14,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       .replace(/\s*&\s*/g, '-and-')                                     // Smith & Jones → smith-and-jones
       .replace(/&/g, '-and-')                                           // catch remaining lone ampersands
       .toLowerCase()
+      .replace(/\./g, "")                                               // no periods
       .replace(/[^a-z0-9]+/g, '-')                                      // non-alphanum → dash
+      .replace(/-+/g, "-")                                              // no double dashes
       .replace(/^-+|-+$/g, '');                                         // trim leading/trailing dashes
 
     const axialUrl = `https://network.axial.net/company/${slug}`;
