@@ -23,3 +23,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.create({ url: axialUrl });
   }
 });
+
+chrome.webRequest.onBeforeRequest.addListener(
+  function (details) {
+    const match = details.url.match(/^https:\/\/pitchbook\.com\/profiles\/investor\/([\d-]+)$/);
+    if (match) {
+      const id = match[1];
+      const newUrl = `https://my.pitchbook.com/profile/${id}/investor/profile`;
+      return { redirectUrl: newUrl };
+    }
+  },
+  { urls: ["*://pitchbook.com/profiles/investor/*"] },
+  ["blocking"]
+);

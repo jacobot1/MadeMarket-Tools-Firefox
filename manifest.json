@@ -5,13 +5,18 @@
   "description": "Inject tools into MadeMarket pages and add Axial search context menu.",
   "permissions": [
     "contextMenus",
-    "activeTab"
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://pitchbook.com/profiles/investor/*",
+    "*://*.pitchbook.com/profiles/investor/*"
   ],
   "browser_action": {
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
